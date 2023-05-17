@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_spacing">
+
+        <ImageView
+            android:id="@+id/button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/back_button" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/track"
+            style="@style/TextViewHeader"
+            app:layout_constraintStart_toEndOf="@id/button_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/button_like"
+            tools:text="Москва - Москва" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/service_class"
+            style="@style/TexViewPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/track"
+            tools:text="ECONOMY" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/price"
+            style="@style/TextViewHeader"
+            app:layout_constraintBottom_toTopOf="@id/date_departure"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/service_class"
+            tools:text="5000" />
+
+        <Space
+            android:id="@+id/spacer_price"
+            android:layout_width="@dimen/dimen_textView"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/price"
+            app:layout_constraintStart_toEndOf="@id/price"
+            app:layout_constraintTop_toTopOf="@id/price" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextViewHeader"
+            android:text="@string/currency"
+            app:layout_constraintBottom_toBottomOf="@id/price"
+            app:layout_constraintStart_toEndOf="@id/spacer_price" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_like"
+            style="@style/Widget.AppTheme.LikeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/like_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/icon_departure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/common_spacing"
+            android:src="@drawable/departure"
+            app:layout_constraintBottom_toBottomOf="@id/date_departure"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/date_departure"
+            android:contentDescription="@string/image_departure" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/date_departure"
+            style="@style/TexViewPrimary"
+            app:layout_constraintStart_toEndOf="@id/icon_departure"
+            app:layout_constraintTop_toBottomOf="@id/price"
+            tools:text="01.01.2001" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/city_departure"
+            style="@style/TexViewPrimary"
+            app:layout_constraintStart_toStartOf="@id/date_departure"
+            app:layout_constraintTop_toBottomOf="@id/date_departure"
+            tools:text="SVO Москва" />
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/common_spacing"
+            android:contentDescription="@string/image_arrow"
+            android:src="@drawable/arrow_vertical"
+            app:layout_constraintStart_toStartOf="@id/date_departure"
+            app:layout_constraintTop_toBottomOf="@id/city_departure" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/time_departure"
+            style="@style/TextViewHeader"
+            android:layout_marginStart="@dimen/common_spacing"
+            app:layout_constraintStart_toEndOf="@id/arrow"
+            app:layout_constraintTop_toBottomOf="@id/city_departure"
+            tools:text="09:00" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/flight_time"
+            style="@style/TexViewPrimary"
+            android:layout_marginStart="@dimen/common_spacing"
+            app:layout_constraintBottom_toTopOf="@id/time_arrival"
+            app:layout_constraintStart_toEndOf="@id/arrow"
+            app:layout_constraintTop_toBottomOf="@id/time_departure"
+            tools:text="Время в пути: 1ч" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/time_arrival"
+            style="@style/TextViewHeader"
+            android:layout_marginStart="@dimen/common_spacing"
+            app:layout_constraintBottom_toBottomOf="@id/arrow"
+            app:layout_constraintStart_toEndOf="@id/arrow"
+            tools:text="10:00" />
+
+        <ImageView
+            android:id="@+id/icon_arrival"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/common_spacing"
+            android:src="@drawable/arrival"
+            app:layout_constraintBottom_toBottomOf="@id/date_arrival"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/date_arrival"
+            android:contentDescription="@string/image_arrival" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/date_arrival"
+            style="@style/TexViewPrimary"
+            app:layout_constraintStart_toEndOf="@id/icon_arrival"
+            app:layout_constraintTop_toBottomOf="@id/arrow"
+            tools:text="01.01.2001" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/city_arrival"
+            style="@style/TexViewPrimary"
+            app:layout_constraintStart_toStartOf="@id/date_arrival"
+            app:layout_constraintTop_toBottomOf="@id/date_arrival"
+            tools:text="VKO Москва" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

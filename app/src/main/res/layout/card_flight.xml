@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/common_spacing"
+    android:layout_marginBottom="@dimen/common_spacing"
+    android:background="@drawable/card_background"
+    android:elevation="@dimen/card_elevation"
+    android:padding="@dimen/common_spacing">
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/price"
+        style="@style/TextViewHeader"
+        app:layout_constraintBottom_toBottomOf="@id/button_like"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/button_like"
+        tools:text="5000" />
+
+    <Space
+        android:id="@+id/spacer_price"
+        android:layout_width="@dimen/dimen_textView"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/price"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/TextViewHeader"
+        android:text="@string/currency"
+        app:layout_constraintBottom_toBottomOf="@id/price"
+        app:layout_constraintStart_toEndOf="@id/spacer_price" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/date_departure"
+        style="@style/TexViewPrimary"
+        app:layout_constraintBottom_toTopOf="@id/time_departure"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="01.01.2001" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/time_departure"
+        style="@style/TextViewHeader"
+        app:layout_constraintBottom_toTopOf="@id/city_departure"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="09:00" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/city_departure"
+        style="@style/TexViewPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Москва" />
+
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:contentDescription="@string/image_arrow"
+        android:padding="@dimen/common_spacing"
+        android:src="@drawable/arrow_horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/time_departure"
+        app:layout_constraintEnd_toStartOf="@id/time_arrival"
+        app:layout_constraintStart_toEndOf="@id/time_departure"
+        app:layout_constraintTop_toTopOf="@id/time_departure" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_like"
+        style="@style/Widget.AppTheme.LikeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/like_button"
+        app:layout_constraintBottom_toTopOf="@id/date_arrival"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/date_arrival"
+        style="@style/TexViewPrimary"
+        app:layout_constraintBottom_toTopOf="@id/time_arrival"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="01.01.2001" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/time_arrival"
+        style="@style/TextViewHeader"
+        app:layout_constraintBottom_toTopOf="@id/city_arrival"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="09:00" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/city_arrival"
+        style="@style/TexViewPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Москва" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

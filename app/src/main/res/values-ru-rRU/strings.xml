@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WildberriesTravel</string>
+
+    <string name="empty_list">Рейсов нет.\n Попоробуйте изменить запрос.</string>
+    <string name="error_loading">Что-то пошло не так. Попробуйте позднее</string>
+    <string name="retry_loading">Повторить</string>
+    <string name="currency">руб.</string>
+    <string name="image_arrow">Изображение указателя</string>
+    <string name="track">%s - %s</string>
+    <string name="city_with_code">(%s) %s</string>
+    <string name="like_button">Кнопка лайк</string>
+    <string name="flight_time">Время в пути: %s</string>
+    <string name="back_button">Кнопка назад</string>
+    <string name="image_departure">Изображение вылет</string>
+    <string name="image_arrival">Изображение прибытие</string>
+</resources>

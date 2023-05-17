@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">WildberriesTravel</string>
+
+    <string name="empty_list">There are no flights.\nTry to change your query.</string>
+    <string name="error_loading">Something went wrong. Try again later</string>
+    <string name="retry_loading">Retry</string>
+    <string name="currency">rub.</string>
+    <string name="image_arrow">Image arrow</string>
+    <string name="track">%s - %s</string>
+    <string name="city_with_code">(%s) %s</string>
+    <string name="like_button">Like button</string>
+    <string name="flight_time">Flight time: %s</string>
+    <string name="back_button">Back button</string>
+    <string name="image_departure">Image departure</string>
+    <string name="image_arrival">Image arrival</string>
+</resources>
