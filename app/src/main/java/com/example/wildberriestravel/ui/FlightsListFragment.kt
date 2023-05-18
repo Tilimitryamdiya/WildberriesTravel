@@ -15,11 +15,13 @@ import com.example.wildberriestravel.R
 import com.example.wildberriestravel.adapter.AdapterListener
 import com.example.wildberriestravel.adapter.FlightsAdapter
 import com.example.wildberriestravel.databinding.FragmentFlightsListBinding
-import com.example.wildberriestravel.model.Flight
+import com.example.wildberriestravel.dto.Flight
 import com.example.wildberriestravel.viewmodel.FlightsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class FlightsListFragment : Fragment() {
 
     private val startLocationCode = "LED"
@@ -31,7 +33,6 @@ class FlightsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentFlightsListBinding.inflate(inflater, container, false)
-
 
         val adapter = FlightsAdapter(object : AdapterListener {
             override fun onLike(flight: Flight) {
@@ -49,7 +50,7 @@ class FlightsListFragment : Fragment() {
         binding.listContainer.adapter = adapter
         viewModel.loadFlights(startLocationCode)
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.data.collectLatest {
                     adapter.submitList(it)

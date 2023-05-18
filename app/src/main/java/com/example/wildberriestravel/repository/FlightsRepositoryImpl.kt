@@ -1,61 +1,58 @@
 package com.example.wildberriestravel.repository
 
-import com.example.wildberriestravel.model.Flight
-import com.example.wildberriestravel.model.FlightsList
-import com.google.gson.Gson
-import okhttp3.*
+import android.util.Log
+import com.example.wildberriestravel.api.ApiService
+import com.example.wildberriestravel.dao.FlightDao
+import com.example.wildberriestravel.entity.FlightEntity
+import com.example.wildberriestravel.entity.toDto
+import com.example.wildberriestravel.entity.toEntity
+import com.example.wildberriestravel.error.ApiError
+import com.example.wildberriestravel.error.NetworkError
+import com.example.wildberriestravel.error.UnknownError
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
-import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 
-class FlightsRepositoryImpl: FlightsRepository {
+class FlightsRepositoryImpl @Inject constructor(
+    private val dao: FlightDao,
+    private val apiService: ApiService,
+) : FlightsRepository {
 
-    private val client = OkHttpClient.Builder()
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .build()
-    private val gson = Gson()
+    override val data = dao.getAll()
+        .map(List<FlightEntity>::toDto)
+        .flowOn(Dispatchers.Default)
 
-    override fun getAll(
-        callback: FlightsRepository.FlightsCallback<List<Flight>>,
+    override suspend fun getAll(
         startLocationCode: String,
     ) {
-        val startLocationCodeRequest = "{\"startLocationCode\":\"$startLocationCode\"}"
-        val body = startLocationCodeRequest.toRequestBody("application/json".toMediaTypeOrNull())
-        val request = Request.Builder()
-            .url(BASE_URL)
-            .header("Accept", "application/json, text/plain, /")
-            .header("Content-Type", "application/json")
-            .post(body)
-            .build()
-
-        client.newCall(request)
-            .enqueue(object : Callback {
-
-                override fun onResponse(call: Call, response: Response) {
-                    try {
-                        val responseBody =
-                            response.body?.string() ?: throw RuntimeException("body is null")
-                        callback.onSuccess(
-                            gson.fromJson(
-                                responseBody,
-                                FlightsList::class.java
-                            ).flights
-                        )
-                    } catch (e: Exception) {
-                        callback.onError(e)
-                    }
-                }
-
-                override fun onFailure(call: Call, e: IOException) {
-                    callback.onError(e)
-                }
-            })
+        try {
+            val startLocationCodeRequest =
+                "{\"startLocationCode\":\"$startLocationCode\"}"
+                    .toRequestBody("application/json".toMediaTypeOrNull())
+            val response = apiService.getFlights(startLocationCodeRequest)
+            if (!response.isSuccessful) {
+                throw ApiError(response.message())
+            }
+            val data = response.body()?.flights ?: throw ApiError(response.message())
+            dao.insert(data.toEntity())
+        }catch (e: IOException) {
+            throw NetworkError
+        } catch (e: Exception) {
+            Log.e("UnknownError", e.stackTraceToString())
+            throw UnknownError
+        }
     }
 
-    companion object {
-        private const val BASE_URL =
-            "https://vmeste.wildberries.ru/api/avia-service/twirp/aviaapijsonrpcv1.WebAviaService/GetCheap"
+    override suspend fun refreshFlights(startLocationCode: String) {
+        dao.removeAll()
+        getAll(startLocationCode)
+    }
+
+    override suspend fun likeFlight(searchToken: String) {
+        dao.likeById(searchToken)
     }
 }

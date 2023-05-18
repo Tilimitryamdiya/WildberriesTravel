@@ -24,7 +24,7 @@
             android:id="@+id/track"
             style="@style/TextViewHeader"
             app:layout_constraintStart_toEndOf="@id/button_back"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_like"
             app:layout_constraintEnd_toStartOf="@id/button_like"
             tools:text="Москва - Москва" />
 

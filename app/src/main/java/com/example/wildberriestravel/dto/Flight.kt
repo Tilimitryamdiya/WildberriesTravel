@@ -1,4 +1,4 @@
-package com.example.wildberriestravel.model
+package com.example.wildberriestravel.dto
 
 data class Flight(
     val startDate: String,
@@ -10,9 +10,5 @@ data class Flight(
     val serviceClass: String,
     val price: Int,
     val searchToken: String,
-    var likedByMe: Boolean = false,
-)
-
-data class FlightsList(
-    val flights: List<Flight> = emptyList()
+    var likedByMe: Boolean,
 )

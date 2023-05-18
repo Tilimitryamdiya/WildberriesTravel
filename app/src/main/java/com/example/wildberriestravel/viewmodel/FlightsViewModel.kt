@@ -3,19 +3,20 @@ package com.example.wildberriestravel.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.wildberriestravel.model.Flight
+import androidx.lifecycle.viewModelScope
+import com.example.wildberriestravel.dto.Flight
 import com.example.wildberriestravel.model.FlightModelState
 import com.example.wildberriestravel.repository.FlightsRepository
-import com.example.wildberriestravel.repository.FlightsRepositoryImpl
-import kotlinx.coroutines.flow.*
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FlightsViewModel: ViewModel() {
+@HiltViewModel
+class FlightsViewModel @Inject constructor(
+    private val repository: FlightsRepository
+) : ViewModel() {
 
-    private val repository: FlightsRepository = FlightsRepositoryImpl()
-
-    private val _data: MutableStateFlow<List<Flight>?> = MutableStateFlow(null)
-    val data: Flow<List<Flight>?>
-        get() = _data.asStateFlow()
+    val data = repository.data
 
     private var _dataState = MutableLiveData(FlightModelState())
     val dataState: LiveData<FlightModelState>
@@ -26,19 +27,16 @@ class FlightsViewModel: ViewModel() {
         get() = _flight
 
     fun loadFlights(startLocationCode: String) {
-        _dataState.postValue(FlightModelState(loading = true))
-        repository.getAll(object : FlightsRepository.FlightsCallback<List<Flight>> {
-
-            override fun onSuccess(value: List<Flight>) {
-                _data.value = value
-                _dataState.postValue(FlightModelState(empty = value.isEmpty()))
+        viewModelScope.launch {
+            try {
+                _dataState.postValue(FlightModelState(loading = true))
+                repository.getAll(startLocationCode)
+                _dataState.postValue(FlightModelState())
+            } catch (e: Exception) {
+                _dataState.value = FlightModelState(error = true)
             }
 
-            override fun onError(e: Exception) {
-                _dataState.postValue(FlightModelState(error = true))
-            }
-
-        }, startLocationCode)
+        }
     }
 
     fun putFlight(flight: Flight) {
@@ -50,6 +48,8 @@ class FlightsViewModel: ViewModel() {
     }
 
     fun like(flight: Flight) {
-
+        viewModelScope.launch {
+            repository.likeFlight(flight.searchToken)
+        }
     }
 }

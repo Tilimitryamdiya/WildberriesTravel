@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wildberriestravel.databinding.CardFlightBinding
-import com.example.wildberriestravel.model.Flight
+import com.example.wildberriestravel.dto.Flight
 import com.example.wildberriestravel.util.DateTimeFormatter
 
 class FlightsAdapter(
