@@ -2,11 +2,21 @@
 <resources>
 
     <style name="Widget.AppTheme.LikeButton" parent="Widget.Material3.Button.IconButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="icon">@drawable/selector_like</item>
         <item name="iconTint">@color/color_secondary</item>
         <item name="android:checkable">true</item>
         <item name="android:minWidth">@dimen/icon_button_min_size</item>
         <item name="android:minHeight">@dimen/icon_button_min_size</item>
+    </style>
+
+    <style name="Widget.AppTheme.Button" parent="Widget.Material3.Button.IconButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">@dimen/icon_button_min_size</item>
+        <item name="android:minHeight">@dimen/icon_button_min_size</item>
+        <item name="iconTint">@color/color_primary_dark</item>
     </style>
 
     <style name="TexViewPrimary">
