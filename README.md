@@ -2,7 +2,7 @@
 
 ### Первый экран ###
 
-<img src="pic/first_screen.PNG" width="25%" height="25%">
+<img src="pic/first_screen.png" width="25%" height="25%">
 
 Содержит список актуальных дешевых авиаперелетов:
 - Город отправления.
@@ -14,7 +14,7 @@
 
 ### Второй экран ###
 
-<img src="pic/second_screen.PNG" width="25%" height="25%">
+<img src="pic/second_screen.png" width="25%" height="25%">
 
 - Открывается при выборе одной из ячеек первого экрана. 
 - Добавлена возможность вернуться к первому экрану назад.
